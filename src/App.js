@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./Home-module/Navbar";
+import Forgot from "./user-module/Forgot";
+import Login from "./user-module/Login";
+import { Route,Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import Profile from "./user-module/Profile";
+import { createBrowserRouter,RouterProvider } from "react-router-dom";
 
 function App() {
+
+  const router=createBrowserRouter([
+    { element:<Login></Login>, path:"/login" },
+    { element:<Forgot /> , path:"/forgotPassword" },
+    {element:<Profile/>,path:"/profile"}
+  ])
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+   
+    <div>
+     <RouterProvider router={router} />
+      {/* <Profile></Profile> */}
+
+    {/* <Login></Login> */}
+     
+     {/* <Forgot></Forgot> */}
+
+      
     </div>
   );
 }
