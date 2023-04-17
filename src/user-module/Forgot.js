@@ -1,7 +1,7 @@
 import { Grid, Paper,Link, TextField,Avatar, Box } from "@mui/material"
 import { GlobalStyle1 } from "../stylecomponent/forFirstDiv";
 import {Button} from "@mui/material";
-import change from "../images/change.png"
+import eidiko1 from "../images/eidiko1.jpg"
 import axios from "axios";
 import { Navigate } from "react-router";
 import { useState } from "react";
@@ -31,7 +31,7 @@ export default function Forgot(){
       setValidationError(validation(employeeId3))
 
      
-       axios.post(`${baseUrl}/forgot-password?username=${employeeId3}`).then(result=>{
+       axios.post(`${baseUrl}/auth/forgot-password?username=${employeeId3}`).then(result=>{
         if(result.status===200){
           setmessage(result.data.message)
         }
@@ -69,7 +69,7 @@ export default function Forgot(){
 
     <Grid  display="flex" alignItems={"center"} justifyContent={"center"}> 
 <Avatar  sx={{ width: 120, height: 120,backgroundColor:"#2196F3",marginBottom:"80px"}}>
-<img   src={change} style={{display:"flex",height:"100px",width:"150px"}} alt="not found"></img>
+<img   src={eidiko1} style={{display:"flex",height:"100px",width:"150px"}} alt="not found"></img>
 </Avatar>
 </Grid>
 

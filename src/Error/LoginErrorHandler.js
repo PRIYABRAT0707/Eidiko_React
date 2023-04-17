@@ -5,9 +5,9 @@ export default function  validation(employeeId){
     if(!employeeId){
         error.name="employee Id is mandatory"
     }
-    else if(employeeId.length!==4){
-        error.name="employee Id must be 4 digit"
-    }
+    // else if(employeeId.length){
+    //     error.name="employee Id must be 4 digit"
+    // }
 
     return error
 

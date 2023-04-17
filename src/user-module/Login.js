@@ -49,12 +49,13 @@ export default function Login(){
        setValidationError1(passwordErrorHandler(password))
 
 
-        axios.post(`${baseUrl}/login`,{
+        axios.post(`${baseUrl}/auth/login`,{
             username:employeeId,
             password:password
         }).then(result=>{
             if(result.status===200){
                 navigate("/profile")
+                localStorage.setItem("token",result.data.token)
 
             }
             else{
@@ -117,10 +118,9 @@ alignContent="center"
 
  <Grid container direction="row"  display="flex" alignItems={"center"} justifyContent={"center"} style={{marginTop:"20px"}}>
 
-<TextField  value={employeeId}  onChange={HandleEmployeeId} id="employeeId1" label="EmployeeId" name="employeeid" type="number"  placeholder="employeeId" fullWidth required></TextField>
+<TextField  value={employeeId}  onChange={HandleEmployeeId} id="employeeId1" label="EmployeeId" name="employeeid" type="number" max="4" placeholder="employeeId" fullWidth required></TextField>
  </Grid>
  {validationError.name && <p style={{color:"red",fontSize:"15px"}}>{validationError.name}</p>}
-
 
 
 
