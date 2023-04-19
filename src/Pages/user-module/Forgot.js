@@ -1,12 +1,12 @@
 import { Grid, Paper,Link, TextField,Avatar, Box } from "@mui/material"
-import { GlobalStyle1 } from "../stylecomponent/forFirstDiv";
+import { GlobalStyle1 } from "../../Components/stylecomponent/forFirstDiv"
 import {Button} from "@mui/material";
-import eidiko1 from "../images/eidiko1.jpg"
+import eidiko1 from "../../images/eidiko1.jpg"
 import axios from "axios";
 import { Navigate } from "react-router";
 import { useState } from "react";
-import validation from "../Error/LoginErrorHandler";
-import { baseUrl } from "../user-service/baseUrl";
+import validation from "../../Error/LoginErrorHandler"
+import userServiceModule from "../../Services/user-service/UserService"
 
 
 export default function Forgot(){
@@ -30,20 +30,14 @@ export default function Forgot(){
       e.preventDefault()
       setValidationError(validation(employeeId3))
 
-     
-       axios.post(`${baseUrl}/auth/forgot-password?username=${employeeId3}`).then(result=>{
-        if(result.status===200){
-          setmessage(result.data.message)
-        }
-        // else{
-        //   setmessage("employee id is not found")
-        // }
+     userServiceModule.forgotPasswordService(employeeId3).then((res)=>{
 
-        
-       })
-   .catch(error=>{
-      console.log(error)
-   })
+     
+      if(res.status===200){
+        setmessage(res.data.message)
+     }}).catch(error=>{
+   }
+   )
 
 
     }

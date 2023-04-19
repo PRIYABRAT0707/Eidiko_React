@@ -1,14 +1,13 @@
 import { Grid, Paper,TextField,Button,Link, Avatar } from "@mui/material";
-import eidiko1 from '../images/eidiko1.jpg';
-import img2 from '../images/img2.png';
+import eidiko1 from '../../images/eidiko1.jpg';
+import img2 from '../../images/img2.png';
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import validation from "../Error/LoginErrorHandler";
-import passwordErrorHandler from "../Error/passwordErrorHandler";
-import { baseUrl } from "../user-service/baseUrl";
-import { GlobalStyle1 } from "../stylecomponent/forFirstDiv";
-import { Form } from "react-router-dom";
+import validation from "../../Error/LoginErrorHandler";
+import passwordErrorHandler from "../../Error/passwordErrorHandler";
+import { GlobalStyle1 } from "../../Components/stylecomponent/forFirstDiv";
+import userServiceModule from "../../Services/user-service/UserService";
 
 
 
@@ -19,7 +18,7 @@ export default function Login(){
 
     const grid2={height:"100%",width:"100%",backgroundColor:"#2196F3"}
     const grid3={height:"100%",width:"100%",backgroundColor:"FFFFFF", display: "flex",justifyContent: "center",alignItems: "center",textAlign: "center",verticalAlign: "middle"}
-    const button1={backgroundColor:"#2196F3",color:"white",width:"290px",borderRadius:"20px",marginTop:"20px",display:"flex"}
+    const button1={backgroundColor:"#2196F3",color:"white",width:"80%",borderRadius:"20px",marginTop:"20px",display:"block"}
    
 
     const[employeeId,setEmployeeId]=useState("")
@@ -47,26 +46,21 @@ export default function Login(){
        setValidationError(validation(employeeId))
 
        setValidationError1(passwordErrorHandler(password))
-
-
-        axios.post(`${baseUrl}/auth/login`,{
-            username:employeeId,
-            password:password
-        }).then(result=>{
-            if(result.status===200){
-                navigate("/profile")
-                localStorage.setItem("token",result.data.token)
-
-            }
-            else{
-                navigate("/login")
-            }
-
-        })
-    .catch(error=>{
-        setError(error)
+    
+      userServiceModule.logService(employeeId,password).then((res)=>{
         
-    })
+        if(res.status===200){
+            navigate("/profile")
+          }
+          else{
+            navigate("/login")
+               }
+       
+
+      }).catch(error=>{
+            setError(error)
+            
+        })
 
     }
 
@@ -114,7 +108,7 @@ alignContent="center"
  <h3>Login</h3>
  </Grid>
 
-<Form onSubmit={loginHandle} >
+<form onSubmit={loginHandle} >
 
  <Grid container direction="row"  display="flex" alignItems={"center"} justifyContent={"center"} style={{marginTop:"20px"}}>
 
@@ -147,7 +141,7 @@ alignContent="center"
      <Button id="loginbutton" variant="contained" style={button1}  type="submit">login</Button>
 </Grid>
 
-</Form>
+</form>
 
 
 </Grid>
