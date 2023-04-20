@@ -24,7 +24,7 @@ navigate("/")
 
     return (
 
-        <Container style={{backgroundColor:"#2196F3"}}>
+        <Container>
                
            
            

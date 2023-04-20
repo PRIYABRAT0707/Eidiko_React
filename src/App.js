@@ -15,28 +15,19 @@ import CreateEmployee from "./Pages/Employee/CreateEmployee";
 import { ThemeProvider } from "@emotion/react";
 import ResetPassword from "./Pages/user-module/ResetPassword";
 import SideNavBar from "./Components/Navbar/SideNavBar";
+import WorkInfo from "./Pages/user-module/WorkInfo";
+import ShiftTimings from "./Pages/user-module/ShiftTimings";
+import ReportingManager from "./Pages/user-module/ReportingManager";
 
 
 
 function App() {
-//   const router=createBrowserRouter([
-//     {element:<Homepage></Homepage> ,path:"/"}
-//   ,{element:<Login></Login>, path:"/login" },
-//   { element:<Forgot /> , path:"/forgotPassword" },
-//   {element:<Profile/>,path:"/profile"},
-//   {element:<AlertDialog></AlertDialog>,path:"/dialog"},
-//   {element:<DataUpload></DataUpload>,path:"/fileupload"},
-//   {element:<CreateEmployee></CreateEmployee>,path:"/create-employee"},
-//   {element:<UserRoute></UserRoute>,path:"/user"},
-//   {element:<ResetPassword></ResetPassword>,path:"/reset-password"},
-//   {element:<SideNavBar></SideNavBar>,path:"/sidenavbar"}
 
-// ])
   
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <ResponsiveAppBar></ResponsiveAppBar> */}
+      
       <BrowserRouter>
       <ResponsiveAppBar></ResponsiveAppBar>
       <Routes>
@@ -44,16 +35,20 @@ function App() {
 
         <Route path="/login" element={<Login />} />
         <Route path="/forgot-password" element={<Forgot />} />
+
         <Route path="/user" element={<UserRoute />}>
           <Route index path="profile" element={<Profile />} />
           <Route index path="create-employee" element={<CreateEmployee />} />
+          <Route index path="workinfo" element={<WorkInfo />} />
+          <Route index path="shifttimings" element={<ShiftTimings />} />
+          <Route index path="reporting-manager" element={<ReportingManager></ReportingManager>}></Route>
+
         </Route>
       </Routes>
 
 
     </BrowserRouter>
-        {/* <RouterProvider router={router} > */}
-     {/* </RouterProvider> */}
+     
    
     </ThemeProvider>
 
