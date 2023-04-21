@@ -8,26 +8,44 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 
 const SideNavBar = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
-    const [open, setOpen] = React.useState(false);
+    const [profileOpen, setprofileOpen] = React.useState(false);
+    const [employeesOpen, setemployeesOpen] = React.useState(false);
+    
 
-    const handleClick = () => {
-        setOpen(!open);
+    const handleProfileClick = () => {
+        setprofileOpen(!profileOpen);
     };
-     const logoutHandle=()=>{
-sessionStorage.clear()
-navigate("/")
-     }
+    const handleEmployeeClick = () => {
+        setemployeesOpen(!employeesOpen);
+    };
+    const logoutHandle = () => {
+        sessionStorage.clear()
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Logout successfully completed ! Redirecting to Login page...',
+            showConfirmButton: false,
+            timer: 1500
+          })
+     
+        navigate("/login")
+    }
+
+    const handleNavigation=(page)=>{
+        navigate(page)
+    }
 
     return (
 
         <Container>
-               
-           
-           
+
+
+
             <ListItemButton>
                 <ListItemIcon>
                     <ManageAccountsIcon />
@@ -42,22 +60,22 @@ navigate("/")
                 <ListItemText primary="Biometric Report" />
             </ListItemButton>
 
-            <ListItemButton onClick={handleClick}>
+            <ListItemButton onClick={handleProfileClick}>
                 <ListItemIcon>
                     <ManageAccountsIcon />
                 </ListItemIcon>
                 <ListItemText primary="Profile" />
-                {open ? <ExpandLess /> : <ExpandMore />}
+                {profileOpen ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
-            <Collapse in={open} timeout="auto" unmountOnExit>
+            <Collapse in={profileOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={()=>handleNavigation('/user/profile')}>
                         <ListItemIcon>
                             <SpeakerNotes />
                         </ListItemIcon>
                         <ListItemText primary="Information" />
                     </ListItemButton>
-                    <ListItemButton sx={{ pl: 4 }}>
+                    <ListItemButton sx={{ pl: 4 }} onClick={()=>handleNavigation('/user/change-password')}>
                         <ListItemIcon>
                             <Create />
                         </ListItemIcon>
@@ -65,15 +83,38 @@ navigate("/")
                     </ListItemButton>
                 </List>
             </Collapse>
+            <ListItemButton onClick={handleEmployeeClick}>
+                <ListItemIcon>
+                    <ManageAccountsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Employees" />
+                {employeesOpen ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+            <Collapse in={employeesOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItemButton sx={{ pl: 4 }}>
+                        <ListItemIcon>
+                            <SpeakerNotes />
+                        </ListItemIcon>
+                        <ListItemText primary="Employees" />
+                    </ListItemButton>
+                    <ListItemButton sx={{ pl: 4 }} onClick={()=>handleNavigation('/user/create-employee')}>
+                        <ListItemIcon>
+                            <Create />
+                        </ListItemIcon>
+                        <ListItemText primary="Create Employee" />
+                    </ListItemButton>
+                </List>
+            </Collapse>
 
-            <ListItemButton  type='submit'>
+            <ListItemButton type='submit'>
                 <ListItemIcon>
                     <LogoutIcon></LogoutIcon>
                 </ListItemIcon>
                 <ListItemText onClick={logoutHandle} primary="Logout" />
             </ListItemButton>
 
-           </Container>
+        </Container>
     )
 }
 

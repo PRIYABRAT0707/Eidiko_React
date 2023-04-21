@@ -1,6 +1,7 @@
 import { baseUrl } from "./baseUrl"
 import axios from "axios"
 import { Navigate, useNavigate } from "react-router"
+import { myAxios } from "../../Server/MyAxios"
 
 const userServiceModule= {
 
@@ -38,6 +39,19 @@ const userServiceModule= {
         }
         return true
     },
+    shiftTimingsService:async function(weekOff,startDate,endDate,shiftStartTime,shiftEndTime){
+        let data=null
+        myAxios.post("/employee/add-shift-timing",{
+            "weekOff":weekOff,
+            "startDate":startDate,
+            "endDate":endDate,
+            "shiftStartTime":shiftStartTime,
+            "shiftEndTime":shiftEndTime
+
+        }).then((result)=>{data=result})
+        return data
+
+    }
     
    
     

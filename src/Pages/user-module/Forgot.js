@@ -34,8 +34,11 @@ export default function Forgot(){
 
      
       if(res.status===200){
-        setmessage(res.data.message)
-     }}).catch(error=>{
+        setmessage(res.data.message)}
+       
+     }).catch(error=>{
+      setmessage(" please enter a valid employee id")
+    
    }
    )
 

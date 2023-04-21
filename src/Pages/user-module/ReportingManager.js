@@ -1,15 +1,16 @@
 
 
 import Person3Icon from '@mui/icons-material/Person3';
-import { Box,TextField,Typography,Paper,Grid,Container,Button} from '@mui/material';
+import { Box,TextField,Typography,Paper,Grid,Container} from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { DatePicker } from '@mui/x-date-pickers';
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import Button from '@mui/material/Button';
 
 
 export default function ReportingManager(){
-    const button1={backgroundColor:"#2196F3",color:"white",borderRadius:"20px",marginBottom:"20px",width:"22%"}
+    const button1={backgroundColor:"#2196F3",color:"#FFFFFF",borderRadius:"20px",marginBottom:"20px",width:"22%"}
     const textfield1={width: 400}
 
     
@@ -82,7 +83,7 @@ export default function ReportingManager(){
                     justifyContent:'center',
                     alignItems:'center'
                 }}>
-                        <Button variant="contained" style={button1}>Submit</Button>
+                        <Button disableElevation variant="contained" style={button1}>Submit</Button>
                     </Grid>
 
                 </Grid>

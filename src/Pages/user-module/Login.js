@@ -1,4 +1,4 @@
-import { Grid, Paper,TextField,Button,Link, Avatar } from "@mui/material";
+import { Grid, Paper,TextField,Button,Link, Avatar, Typography } from "@mui/material";
 import eidiko1 from '../../images/eidiko1.jpg';
 import img2 from '../../images/img2.png';
 import { useState } from "react";
@@ -50,15 +50,15 @@ export default function Login(){
       userServiceModule.logService(employeeId,password).then((res)=>{
         
         if(res.status===200){
-            navigate("/profile")
+            navigate("/user/profile")
           }
-          else{
-            navigate("/login")
-               }
+        //   else{
+        //     navigate("/login")
+        //        }
        
 
       }).catch(error=>{
-            setError(error)
+            setError("please enter valid employee id or password")
             
         })
 
@@ -112,7 +112,7 @@ alignContent="center"
 
  <Grid container direction="row"  display="flex" alignItems={"center"} justifyContent={"center"} style={{marginTop:"20px"}}>
 
-<TextField  value={employeeId}  onChange={HandleEmployeeId} id="employeeId1" label="EmployeeId" name="employeeid" type="number" max="4" placeholder="employeeId" fullWidth required></TextField>
+<TextField  value={employeeId}  onChange={HandleEmployeeId} id="employeeId1" label="Employee Id" name="employeeid" type="number" max="4" placeholder="employeeId" fullWidth required></TextField>
  </Grid>
  {validationError.name && <p style={{color:"red",fontSize:"15px"}}>{validationError.name}</p>}
 
@@ -125,7 +125,7 @@ alignContent="center"
  ></TextField>
  
  </Grid>
- {validationError1.name && <p style={{color:"red",fontSize:"15px"}}>{validationError1.name}</p>}
+ {validationError1.name && <Typography variant="h5" style={{color:"red",fontSize:"15px"}}>{validationError1.name}</Typography>}
 
 
  <Grid  container
@@ -133,7 +133,7 @@ alignContent="center"
   justifyContent="center"
   alignItems="flex-end"
   >
- <Link href="/forgotPassword"><h6 style={{marginLeft:"220px",marginTop:"5px"}}>forgot password?</h6></Link>
+ <Link href="/forgot-password"><h6 style={{marginLeft:"220px",marginTop:"5px"}}>forgot password?</h6></Link>
 
  </Grid>
 
@@ -141,6 +141,7 @@ alignContent="center"
      <Button id="loginbutton" variant="contained" style={button1}  type="submit">login</Button>
 </Grid>
 
+<p  style={{color:"red",fontSize:"19px"}}>{error}</p>
 </form>
 
 

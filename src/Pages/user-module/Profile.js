@@ -171,7 +171,7 @@ const Profile = () => {
                             <CardContent>
                                 <ManageAccountsIcon />(Reporting Manager)
                                 <Typography variant='h6'>
-                                    {reportingManagers.empName}
+                                    {reportingManagers?.empName}
                                 </Typography>
                             </CardContent>
                         </Card>

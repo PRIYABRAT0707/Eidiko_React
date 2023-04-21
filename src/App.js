@@ -4,20 +4,17 @@ import Login from "./Pages/user-module/Login";
 import { Route,Routes } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import Profile from "./Pages/user-module/Profile";
-import { createBrowserRouter,RouterProvider } from "react-router-dom";
 import ResponsiveAppBar from "./Components/Navbar/Navbar";
 import Homepage from "./Pages/Home-module/homepage";
-import AlertDialog from "./Components/HelperComponent/DialogBox";
-import DataUpload from "./Pages/user-module/DataUpload";
 import UserRoute from "./Pages/user-module/UserRoute";
 import { theme } from "./Components/stylecomponent/theme";
 import CreateEmployee from "./Pages/Employee/CreateEmployee";
 import { ThemeProvider } from "@emotion/react";
-import ResetPassword from "./Pages/user-module/ResetPassword";
-import SideNavBar from "./Components/Navbar/SideNavBar";
 import WorkInfo from "./Pages/user-module/WorkInfo";
 import ShiftTimings from "./Pages/user-module/ShiftTimings";
 import ReportingManager from "./Pages/user-module/ReportingManager";
+import ResetPassword from "./Pages/user-module/ResetPassword";
+import DataUpload from "./Pages/user-module/DataUpload";
 
 
 
@@ -42,6 +39,8 @@ function App() {
           <Route index path="workinfo" element={<WorkInfo />} />
           <Route index path="shifttimings" element={<ShiftTimings />} />
           <Route index path="reporting-manager" element={<ReportingManager></ReportingManager>}></Route>
+          <Route index path="reset-password" element={<ResetPassword />} />
+          <Route index path="biometric" element={<DataUpload />} />
 
         </Route>
       </Routes>
