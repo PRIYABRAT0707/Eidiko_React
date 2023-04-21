@@ -52,9 +52,10 @@ export default function Login(){
         if(res.status===200){
             navigate("/user/profile")
           }
-        //   else{
-        //     navigate("/login")
-        //        }
+          else{
+            setError(res.message)
+             //navigate("/login")
+                }
        
 
       }).catch(error=>{

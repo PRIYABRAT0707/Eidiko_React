@@ -17,6 +17,7 @@ import {TextField} from '@mui/material';
 import { useEffect, useState } from 'react';
 import userServiceModule from '../../Services/user-service/UserService';
 import { TimeFormat } from '../../Components/HelperComponent/TimeFormat';
+import Swal from 'sweetalert2';
 
 
 
@@ -36,13 +37,7 @@ export default function ShiftTimings(){
     const [startDate,setstartDate]=useState(new Date("2000-01-01"))
     const [endDate,setEndDate]=useState(new Date("2000-01-01"))
 
-    // const [shiftTimings,setshiftTimings]=useState({
-    //   "weekOff":checkValue,
-    //   "startDate":startdate,
-    //   "endDate":enddate,
-    //   "shiftStartTime":startTime ,
-    //   "shiftEndTime":endTime
-    // })
+    const [message,setMessage]=useState("")
 
       const handlechange=(e)=>{
         const { value, checked } = e.target;
@@ -58,6 +53,14 @@ export default function ShiftTimings(){
         }
       }
     
+      const [state, setState] =useState({
+        open: false,
+        vertical: 'top',
+        horizontal: 'center',
+    });
+    const { vertical, horizontal, open } = state;
+    
+
       const shiftTimingsHandle=(e)=>{
         e.preventDefault()
         let startTime3=startTime.startHour+":"+startTime.startMinute+":"+"00"
@@ -66,23 +69,46 @@ export default function ShiftTimings(){
         //console.log(startTime3)
 
         userServiceModule.shiftTimingsService(checkValue,startDate,endDate,startTime3,endTime3).then((res)=>{
-          console.log(res)
-          // if(res.status===201){
-          //   console.log("success")
-          // }
-          // else{
-          //   console.log("denied")
-          // }
-        }).catch((error)=>console.log(error))
+           //console.log(res)
+          if(res.status===200 && res.data.statusMessage==='success' ){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: res.data.message,
+              showConfirmButton: false,
+              timer: 1500
+          })
+           // setMessage(res.data.message)
+          }
+          else{
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: res.data.message,
+              showConfirmButton: false,
+              timer: 1500
+          }
+          )
+
+          }
+        }).catch((error)=>{
+          Swal.fire(
+            {
+                position: 'center',
+                icon: 'error',
+                title: error.response.data.message,
+                showConfirmButton: false,
+                timer: 1500
+            }
+
+        )
+
+        })
 
 
 
       }
-  //  console.log(checkValue)
-  //  console.log(startDate)
-  //  console.log(endDate)
-  //  console.log(startTime)
-  //  console.log(endTime)
+  
 
 return(
     <Box style={{backgroundColor:"#FFFFFF",height:"92vh"}}>
@@ -302,6 +328,7 @@ return(
                             <Button  type="submit" variant="contained" style={button1}>Update</Button>
                         </Grid>
 
+                        <Typography variant='h4'  style={{color: {message} === "Processed Successfully" ? "green":"red" ,fontSize:"19px"}}>{message}</Typography>
 
     
 

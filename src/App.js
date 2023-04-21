@@ -39,7 +39,7 @@ function App() {
           <Route index path="workinfo" element={<WorkInfo />} />
           <Route index path="shifttimings" element={<ShiftTimings />} />
           <Route index path="reporting-manager" element={<ReportingManager></ReportingManager>}></Route>
-          <Route index path="reset-password" element={<ResetPassword />} />
+          <Route index path="change-password" element={<ResetPassword />} />
           <Route index path="biometric" element={<DataUpload />} />
 
         </Route>

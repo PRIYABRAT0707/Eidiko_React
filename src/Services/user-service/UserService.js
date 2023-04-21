@@ -39,16 +39,41 @@ const userServiceModule= {
         }
         return true
     },
+
     shiftTimingsService:async function(weekOff,startDate,endDate,shiftStartTime,shiftEndTime){
         let data=null
-        myAxios.post("/employee/add-shift-timing",{
+       await myAxios.post("/employee/add-shift-timing",{
             "weekOff":weekOff,
             "startDate":startDate,
             "endDate":endDate,
             "shiftStartTime":shiftStartTime,
             "shiftEndTime":shiftEndTime
 
-        }).then((result)=>{data=result})
+        }).then((result)=>{
+         
+            data=result}
+       
+        )
+        return data
+
+    },
+
+    reportingManager: async function(manager){
+        let data=null
+        await myAxios.post("/employee/add-reporting-manager",manager).then((res)=>{
+            data=res
+            //console.log(res)
+        })
+
+        return data
+
+    },
+
+    changePassword:async function(empPassword){
+        let data=null
+        myAxios.post("/employee/change-password",empPassword).then((res)=>{
+            data=res
+        }) 
         return data
 
     }
